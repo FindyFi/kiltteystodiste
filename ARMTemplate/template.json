@@ -36,14 +36,14 @@
             "metadata": {
                 "description": "Entra ID Tenant id"
             },
-            "defaultValue": "<Tenant id>"
+            "defaultValue": "39662e39-3e1d-455b-9013-c493ab830fd3"
         },
         "azClientId": {
             "type": "string",
             "metadata": {
                 "description": "azClientId"
             },
-            "defaultValue": "<azClientId>"
+            "defaultValue": "20c6336c-5f16-4499-950f-648e0b0b234e"
         },
         "azClientSecret": {
             "type": "string",
@@ -57,14 +57,14 @@
             "metadata": {
                 "description": "DidAuthority"
             },
-            "defaultValue": "<DidAuthority>"
+            "defaultValue": "did:web:verifiedid.entra.microsoft.com:39662e39-3e1d-455b-9013-c493ab830fd3:0afc3875-fe0b-7b3e-98fa-fa24a9cdab0b"
         },
         "CredentialManifest": {
             "type": "string",
             "metadata": {
               "description": "CredentialManifest"
             },
-            "defaultValue": "<ManifestURL>"
+            "defaultValue": "https://verifiedid.did.msidentity.com/v1.0/tenants/39662e39-3e1d-455b-9013-c493ab830fd3/verifiableCredentials/contracts/dd9784d7-b4c8-9db3-012c-9b4e810f4756/manifest"
           },
         "CredentialType": {
             "type": "string",
