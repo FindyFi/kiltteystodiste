@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Findyn kiltteystodiste</title>
+        <meta name="description" content="Oletko ollut kiltti?">
+        <meta name="author" content="Findynet">
+        <link rel="stylesheet" href="styles.css">
+        <link rel="icon" href="favicon.png">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="width">
+        <meta name="theme-color" content="#41ebff">
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="Findynetin kiltteystodiste">
+        <meta property="og:url" content="https://friend.findy.fi/">
+        <meta property="og:image" content="https://friend.findy.fi/favicon.png">
+        <meta property="og:description" content="Hanki todiste, että olet ollut kiltti tänä vuonna.">
+        <script src="qrcode.min.js"></script>
+    </head>
+    <body>
+        <div id="laatikko">
+            <img src="favicon.png" alt="Findynet" height="256"/>
+            <div id="qrcode"></div>    
+        </div>
+        <div id="avain">....</div>
+        <h1>Olen ollut kiltti -todiste</h1>
+        <div id="ohje">
+            <p>Joulu on aivan nurkan takana, ja pian kuuluu tuttu kysymys: <q>Onko täällä ollut kilttejä lapsia?</q></p>
+            <p>Tänä vuonna sinulla on mahdollisuus olla täysin valmis vastaamaan – ei vain sanoilla, vaan myös virallisella todisteella! Findynet tarjoaa mahdollisuuden hankkia Olen ollut kiltti -todiste, jonka voit ylpeänä esittää Joulupukille juuri ennen lahjojen jakoa.</p>
+            <p>Kuten tiedät, Joulupukki tarkistaa aina kiltteyslistansa kahdesti. Tämä todiste on virallinen merkki siitä, että olet tänä vuonna ollut yksi tonttujen suosikeista – ja ansaitset lahjasi täysin oikeutetusti!</p>
+            <p>Kun pukki kysyy, voit ylpeänä esittää todistuksesi ja vastata: <q>Kyllä, olen ollut kiltti – ja tässä on todisteeni!</q></p>
+        </div>
+        <button type="button" id="lataa">Lataa todiste</button>
+        <footer>
+            <p>Hauskaa joulua ja rauhallista uutta vuotta!</p>
+        </footer>
+        <script>
+            STAR_COUNT = 25
+            var qrcode = new QRCode("qrcode", { width: 256, height: 256 });
+            document.getElementById('lataa').addEventListener('click', async () => {
+                console.log('clicked');
+                document.getElementById('laatikko').classList.toggle('avattu')
+
+                const uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'
+                    .replace(/[xy]/g, function (c) {
+                    const r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+                    return v.toString(16);
+                });
+                const issueUrl = '/api/issuer/issuance-request'
+                const issueParams = {
+                    method: 'GET',
+                    headers: { 'Accept': 'application/json', 'rsid': uuid }
+                }
+                const response = await fetch(issueUrl,  issueParams)
+                const respJson = await response.json()
+                console.log(respJson)
+                if (!respJson.url || !respJson.pin) {
+                    document.getElementById('ohje').textContent = "Pahoittelut, mutta todistetta ei voitu muodostaa. Oletko varma, että olet ollut kiltti?"
+                }
+                else {
+                    qrcode.makeCode(respJson.url)
+                    document.getElementById('avain').textContent = respJson.pin
+                    document.getElementById('ohje').textContent = "Skannaa koodi Microsoft Authenticator -sovelluksella."
+                }
+            })
+            let stars = 0
+            while (stars < STAR_COUNT) {
+                const img = document.createElement('img')
+                img.src = './star.svg'
+                img.className = 'star'
+                img.style.opacity = 0
+                img.style.left = Math.floor((Math.random() * 80) + 10) + '%'
+                img.style.top = Math.floor((Math.random() * 50) + 10) + '%'
+                img.style.animationDelay = Math.floor(Math.random() * STAR_COUNT * 2 * 1000) + 'ms'
+                document.body.appendChild(img)
+                stars++
+            }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: 'Open Sans', Verdana, Helvetica, Arial, Calibri, 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif;
+  background-color: #0d0342;
+  background: linear-gradient(180deg, #41ebff 0%, #0d0342 5%);
+  color: #41ebff;
+  margin: 0;
+  min-height: calc(100vh);
+  overflow: scroll;
+  padding: 15% 0 9em 0;
+  position: relative;
+  text-align: center;
+}
+@keyframes twinkle {
+  from {
+    opacity: 0;
+    transform: scale(0.025);
+  }
+  to {
+    opacity: 1;
+    transform: scale(0.25);
+  }
+}
+.star {
+  animation-direction: alternate;
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
+  animation-name: twinkle;
+  animation-timing-function: ease-in-out;
+  position: absolute;
+  z-index: 1;
+}
+h1 {
+  font-family: "Hanken Grotesk", sans-serif;
+  font-optical-sizing: auto;
+  font-size: 2em;
+  font-style: normal;
+  font-weight: 800;
+}
+#laatikko {
+  height: 256px;
+  margin: 0 auto;
+  position: relative;
+  width: 256px;
+  z-index: 2;
+}
+#laatikko img, #qrcode {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transition: 0.5s all;
+}
+#laatikko img {
+  transform: rotate3d(0, 0, 0, 0);
+}
+#qrcode {
+  background-color: #41ebff;
+  opacity: 0;
+  transform: rotate3d(0, 1, 0, 180deg);
+}
+#laatikko.avattu img {
+  opacity: 0;
+  transform: rotate3d(0, 1, 0, 180deg);
+  z-index: 1;
+}
+#laatikko.avattu #qrcode {
+  opacity: 1;
+  transform: rotate3d(0, 0, 0, 0);
+  z-index: 2;
+}
+#ohje {
+  text-align: left;
+  margin: 1em auto;
+  max-width: 45em;
+  z-index: 2;
+}
+p+p {
+  text-indent: 1em;
+}
+q {
+  font-style: italic;
+}
+button {
+  background: linear-gradient(16deg, #0a00be, #41ebff);
+  border-radius: 0.5em;
+  color: #FFF;
+  font-size: larger;
+  margin: 2em;
+  padding: 0.5em;
+  z-index: 2;
+}
+footer {
+  background: linear-gradient(180deg, #0d0342 0em, #0a00be 1.75em, #FFF 2em);
+  bottom: 0;
+  color: #C00;
+  font-family: "Dancing Script", serif;
+  font-optical-sizing: auto;
+  font-size: xx-large;
+  font-style: normal;
+  font-weight: 600;
+  height: 5em;
+  padding: 3em 0 0 0;
+  position: absolute;
+  width: 100%;
+}

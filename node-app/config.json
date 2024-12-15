@@ -1,0 +1,11 @@
+{
+    "azTenantId": "39662e39-3e1d-455b-9013-c493ab830fd3",
+    "azClientId": "PLACEHOLDER",
+    "azClientSecret": "PLACEHOLDER",
+    "CredentialManifest": "https://verifiedid.did.msidentity.com/v1.0/tenants/39662e39-3e1d-455b-9013-c493ab830fd3/verifiableCredentials/contracts/dd9784d7-b4c8-9db3-012c-9b4e810f4756/manifest",
+    "DidAuthority": "did:web:verifiedid.entra.microsoft.com:39662e39-3e1d-455b-9013-c493ab830fd3:0afc3875-fe0b-7b3e-98fa-fa24a9cdab0b",
+    "acceptedIssuers": "did:web:verifiedid.entra.microsoft.com:39662e39-3e1d-455b-9013-c493ab830fd3:0afc3875-fe0b-7b3e-98fa-fa24a9cdab0b",
+    "CredentialType": "Kiltteystodiste",
+    "issuancePinCodeLength": 4,
+    "dbFile": "./sequence.db"
+}
