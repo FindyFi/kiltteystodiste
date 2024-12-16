@@ -45,8 +45,6 @@
             var qrcode = new QRCode("qrcode", { width: 256, height: 256 });
             document.getElementById('lataa').addEventListener('click', async () => {
                 console.log('clicked');
-                document.getElementById('laatikko').classList.toggle('avattu')
-
                 const uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'
                     .replace(/[xy]/g, function (c) {
                     const r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
@@ -67,6 +65,7 @@
                 }
                 else {
                     qrcode.makeCode(respJson.url)
+                    document.getElementById('laatikko').classList.toggle('avattu')
                     document.getElementById('avain').textContent = respJson.pin
                     document.getElementById('ohje').textContent = "Skannaa QR-koodi Microsoft Authenticator -sovelluksella. Kun Authenticator pyytää nelinumeroista koodia, syötä QR-koodin alla olevat numerot."
                 }
