@@ -200,7 +200,6 @@ module.exports.getSessionDataWrapper = getSessionDataWrapper;
 // echo function so you can test that you can reach your deployment
 app.get("/echo",
     function (req, res) {
-        requestTrace( req );
         res.status(200).json({
             'date': new Date().toISOString(),
             'api': req.protocol + '://' + req.hostname + req.originalUrl,
@@ -217,7 +216,6 @@ app.get("/echo",
 
 // Serve index.html as the home page
 app.get('/', function (req, res) { 
-  requestTrace( req );
   res.sendFile('public/index.html', {root: __dirname})
 })
 

@@ -195,7 +195,6 @@ mainApp.app.get('/api/issuer/issuance-request', async (req, res) => {
 ///////////////////////////////////////////////////////////////////////////////////////
 // Returns the manifest to the UI so it can use it in rendering
 mainApp.app.get('/api/issuer/get-manifest', async (req, res) => {
-  mainApp.requestTrace( req );
   var id = req.query.id;
   res.status(200).json(mainApp.config["manifest"]);   
 })
