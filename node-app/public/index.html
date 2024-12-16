@@ -21,7 +21,7 @@
     </head>
     <body>
         <div id="laatikko">
-            <img src="favicon.png" alt="Findynet" height="256"/>
+            <img class="logo" src="favicon.png" alt="Findynet" height="256"/>
             <div id="qrcode"></div>    
         </div>
         <div id="avain">....</div>
@@ -62,7 +62,7 @@
                 else {
                     qrcode.makeCode(respJson.url)
                     document.getElementById('avain').textContent = respJson.pin
-                    document.getElementById('ohje').textContent = "Skannaa koodi Microsoft Authenticator -sovelluksella."
+                    document.getElementById('ohje').textContent = "Skannaa QR-koodi Microsoft Authenticator -sovelluksella. Kun Authenticator pyytää nelinumeroista koodia, syötä QR-koodin alla olevat numerot."
                 }
             })
             let stars = 0
