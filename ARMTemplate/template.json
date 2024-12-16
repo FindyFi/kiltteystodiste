@@ -83,7 +83,7 @@
     },
     "variables": {
         "appServicePlanPortalName": "[concat(parameters('webAppName'), '-plan')]",
-        "linuxFxVersion": "NODE|18-lts"
+        "linuxFxVersion": "NODE|20-lts"
     },
     "resources": [
         {
