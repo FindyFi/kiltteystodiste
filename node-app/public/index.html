@@ -33,8 +33,10 @@
             <p>Kun pukki kysyy, voit ylpeänä esittää todistuksesi ja vastata: <q>Kyllä, olen ollut kiltti – ja tässä on todisteeni!</q></p>
             <p>Kirjoita nimesi alla olevaan kenttään ja paina <q>Lataa todiste</q>. Saat henkilökohtaisen todisteen, jossa kerrotaan, että olet ollut kiltti vuonna 2024.</p>
         </div>
-        <input type="text" name="nimi" placeholder="Oikea tai lempunimesi"/>
-        <button type="button" id="lataa">Lataa todiste</button>
+        <form id="form">
+            <input type="text" name="nimi" id="nimi" placeholder="Oikea tai lempinimesi"/>
+            <button type="button" id="lataa">Lataa todiste</button>
+        </form>
         <footer>
             <p>Hauskaa joulua ja rauhallista uutta vuotta!</p>
         </footer>
@@ -50,7 +52,7 @@
                     const r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
                     return v.toString(16);
                 });
-                const issueUrl = '/api/issuer/issuance-request'
+                const issueUrl = '/api/issuer/issuance-request?nimi=' + encodeURIComponent(document.getElementById('nimi').value)
                 const issueParams = {
                     method: 'GET',
                     headers: { 'Accept': 'application/json', 'rsid': uuid }

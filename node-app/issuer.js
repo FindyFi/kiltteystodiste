@@ -144,7 +144,7 @@ mainApp.app.get('/api/issuer/issuance-request', async (req, res) => {
       const insert = `INSERT INTO seq (num) VALUES (${next})`;
       db.run(insert);
       issuanceConfig.claims.number = next.toString();
-      issuanceConfig.claims.name = req.params.nimi;
+      issuanceConfig.claims.name = req.query.nimi;
     }
   }
   console.log( issuanceConfig );
