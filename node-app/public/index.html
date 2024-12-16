@@ -60,14 +60,17 @@
                 console.log(response.status, issueUrl)
                 const respJson = await response.json()
                 console.log(respJson)
-                if (!respJson.url || !respJson.pin) {
+                if (!respJson.url) {
                     document.getElementById('ohje').textContent = "Pahoittelut, mutta todistetta ei voitu muodostaa. Oletko varma, että olet ollut kiltti?"
                 }
                 else {
                     qrcode.makeCode(respJson.url)
                     document.getElementById('laatikko').classList.toggle('avattu')
                     document.getElementById('avain').textContent = respJson.pin
-                    document.getElementById('ohje').textContent = "Skannaa QR-koodi Microsoft Authenticator -sovelluksella. Kun Authenticator pyytää nelinumeroista koodia, syötä QR-koodin alla olevat numerot."
+                    document.getElementById('ohje').textContent = "Skannaa QR-koodi Microsoft Authenticator -sovelluksella."
+                    if (respJson.pin) {
+                        document.getElementById('ohje').textContent += " Kun Authenticator pyytää nelinumeroista koodia, syötä QR-koodin alla olevat numerot."
+                    }
                 }
             })
             let stars = 0
