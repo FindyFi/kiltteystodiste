@@ -6,7 +6,6 @@
 ///////////////////////////////////////////////////////////////////////////////////////
 // Node packages
 var express = require('express')
-var session = require('express-session')
 var base64url = require('base64url')
 var bodyParser = require('body-parser')
 const https = require('node:https')
@@ -161,50 +160,13 @@ var parser = bodyParser.urlencoded({ extended: false });
 // Serve static files out of the /public directory
 app.use(express.static('public'))
 
-// Set up a simple server side session store.
-// The session store will briefly cache issuance requests
-// to facilitate QR code scanning.
-var sessionStore = new session.MemoryStore();
-app.use(session({
-  secret: 'cookie-secret-key',
-  resave: false,
-  saveUninitialized: true,
-  store: sessionStore
-}))
-
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Authorization, Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
 
-module.exports.sessionStore = sessionStore;
 module.exports.app = app;
-
-function getSessionData( id, callback ) {
-  sessionStore.get( id, (error, session) => {
-    callback(session);
-  });
-}
-function getSessionDataWrapper( id ) {
-  return new Promise((resolve, reject) => {
-    getSessionData(id, (goodResponse) => {
-      resolve(goodResponse);
-    }, (badResponse) => {
-      reject(badResponse);
-    });
-  });
-}
-module.exports.getSessionDataWrapper = getSessionDataWrapper;
-
-function requestTrace( req ) {
-  var dateFormatted = new Date().toISOString().replace("T", " ");
-  var h1 = '//****************************************************************************';
-  console.log( `${h1}\n${dateFormatted}: ${req.method} ${req.protocol}://${req.headers["host"]}${req.originalUrl}` );
-  console.log( `Headers:`)
-  console.log(req.headers);
-}
-module.exports.requestTrace = requestTrace;
 
 // echo function so you can test that you can reach your deployment
 app.get("/echo",
@@ -238,4 +200,4 @@ var callback = require('./callback.js');
 
 console.timeEnd("startup");
 // start server
-app.listen(port, () => console.log(`Example issuer app listening on port ${port}!`))
+app.listen(port, () => console.log(`Credential issuer app listening on port ${port}!`))
