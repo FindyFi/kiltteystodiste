@@ -134,7 +134,7 @@ mainApp.app.get('/api/issuer/issuance-request', async (req, res) => {
 
   // set the claim values - only for idTokenHint attestation
   if ( issuanceConfig.claims ) {
-    if ( issuanceConfig.claims.number ) {
+    if ( issuanceConfig.claims.numero ) {
       const query = "SELECT MAX(num) AS seq FROM seq;"
       let next = 1
       const row = await db_get(query)
@@ -143,8 +143,8 @@ mainApp.app.get('/api/issuer/issuance-request', async (req, res) => {
       }
       const insert = `INSERT INTO seq (num) VALUES (${next})`;
       db.run(insert);
-      issuanceConfig.claims.number = next.toString();
-      issuanceConfig.claims.name = req.query.nimi;
+      issuanceConfig.claims.numero = next.toString();
+      issuanceConfig.claims.nimi = req.query.nimi;
     }
   }
   console.log( issuanceConfig );
