@@ -107,6 +107,8 @@ mainApp.app.get('/api/issuer/issuance-request', async (req, res) => {
   console.log( `accessToken: ${accessToken}` );
   
   issuanceConfig.authority = mainApp.config["DidAuthority"]
+
+  var id = req.query.id
   issuanceConfig.callback.url = `https://${req.hostname}/api/request-callback`;
   issuanceConfig.callback.state = id;
   // if pin is required, then generate a pin code. 
