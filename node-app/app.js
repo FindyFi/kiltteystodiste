@@ -8,16 +8,12 @@
 var express = require('express')
 var session = require('express-session')
 var base64url = require('base64url')
-var secureRandom = require('secure-random');
 var bodyParser = require('body-parser')
-// mod.cjs
-const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
-const https = require('https')
-const url = require('url')
-const { SSL_OP_COOKIE_EXCHANGE } = require('constants');
+const https = require('node:https')
+const url = require('node:url')
 var msal = require('@azure/msal-node');
-const fs = require('fs');
-const crypto = require('crypto');
+const fs = require('node:fs');
+const crypto = require('node:crypto');
 var uuid = require('uuid');
 
 console.time("startup");
@@ -52,7 +48,6 @@ if (!config.dbFile) {
 if ( config.issuancePinCodeLength ) {
   config.issuancePinCodeLength = parseInt( config.issuancePinCodeLength );
 }
-console.log(config);
 if (!config.azTenantId) {
   throw new Error('azTenantId is missing in the config.')
 }
