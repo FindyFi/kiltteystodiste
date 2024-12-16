@@ -51,7 +51,7 @@ if ( mainApp.config["purpose"] ) {
   issuanceConfig.registration.purpose = mainApp.config["purpose"];
 }
 if ( issuanceConfig.registration.purpose.startsWith("...") ) {
-  issuanceConfig.registration.purpose = "Todista, että olet ollut kiltti";
+  issuanceConfig.registration.purpose = "Todista olleesi kiltti";
 }
 issuanceConfig.authority = mainApp.config["DidAuthority"]
 issuanceConfig.manifest = mainApp.config["CredentialManifest"]
