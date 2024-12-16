@@ -90,6 +90,11 @@ async function db_get(query) {
 ///////////////////////////////////////////////////////////////////////////////////////
 // This method is called from the UI to initiate the issuance of the  credential
 mainApp.app.get('/api/issuer/issuance-request', async (req, res) => {
+  var id = req.session.id;
+  if ( req.query.id ) {
+    id = req.query.id;
+  }
+
   // get the Access Token
   var accessToken = "";
   try {
@@ -108,7 +113,6 @@ mainApp.app.get('/api/issuer/issuance-request', async (req, res) => {
   
   issuanceConfig.authority = mainApp.config["DidAuthority"]
 
-  var id = req.query.id
   issuanceConfig.callback.url = `https://${req.hostname}/api/request-callback`;
   issuanceConfig.callback.state = id;
   // if pin is required, then generate a pin code. 
