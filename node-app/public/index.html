@@ -41,7 +41,7 @@
             <p>Hauskaa joulua ja rauhallista uutta vuotta!</p>
         </footer>
         <script>
-            STAR_COUNT = 25
+            STAR_COUNT = 5
             var qrcode = new QRCode("qrcode", { width: 256, height: 256 });
             document.getElementById('lataa').addEventListener('click', async () => {
                 console.log('clicked');
@@ -57,7 +57,9 @@
                     method: 'GET',
                     headers: { 'Accept': 'application/json', 'rsid': uuid }
                 }
+                console.log(issueParams)
                 const response = await fetch(issueUrl,  issueParams)
+                console.log(response.status, issueUrl)
                 const respJson = await response.json()
                 console.log(respJson)
                 if (!respJson.url || !respJson.pin) {
