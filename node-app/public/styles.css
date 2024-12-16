@@ -85,6 +85,12 @@ p+p {
 q {
   font-style: italic;
 }
+form {
+  z-index: 2;
+}
+input {
+  font-size: larger;
+}
 button {
   background: linear-gradient(16deg, #0a00be, #41ebff);
   border-radius: 0.5em;
@@ -92,7 +98,6 @@ button {
   font-size: larger;
   margin: 2em;
   padding: 0.5em;
-  z-index: 2;
 }
 footer {
   background: linear-gradient(180deg, #0d0342 0em, #0a00be 1.75em, #FFF 2em);
