@@ -6,22 +6,10 @@
 ///////////////////////////////////////////////////////////////////////////////////////
 // Node packages
 var express = require('express')
-var session = require('express-session')
-var base64url = require('base64url')
-var secureRandom = require('secure-random');
-var bodyParser = require('body-parser')
-// mod.cjs
-const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
-const https = require('https')
-const url = require('url')
-const { SSL_OP_COOKIE_EXCHANGE } = require('constants');
+const https = require('node:https')
+const url = require('node:url')
 const sqlite3 = require('sqlite3').verbose();
-var msal = require('@azure/msal-node');
 var mainApp = require('./app.js');
-
-var parser = bodyParser.urlencoded({ extended: false });
-
-console.log(mainApp.config)
 
 // init DB
 let db = new sqlite3.Database(mainApp.config.dbFile, (err) => {
@@ -52,18 +40,6 @@ var issuanceConfig = {
   "type": "Kiltteystodiste",
   "manifest": "...set at runtime..."
 };
-
-// see if we got a template from 1) envvar or 2) cmd argv
-var requestConfigFile = process.env.ISSUANCEFILE;
-if ( !requestConfigFile ) {
-  var idx = process.argv.findIndex((el) => el == "-i");
-  if ( idx != -1 ) {
-    requestConfigFile = process.argv[idx+1];
-  }
-  if ( requestConfigFile ) {
-    issuanceConfig = require( requestConfigFile );
-  }
-}
 
 if ( mainApp.config["clientName"] ) {
   issuanceConfig.registration.clientName = mainApp.config["clientName"];
@@ -114,13 +90,6 @@ async function db_get(query) {
 ///////////////////////////////////////////////////////////////////////////////////////
 // This method is called from the UI to initiate the issuance of the  credential
 mainApp.app.get('/api/issuer/issuance-request', async (req, res) => {
-  mainApp.requestTrace( req );
-  var id = req.session.id;
-  if ( req.query.id ) {
-    id = req.query.id;
-  }
-  console.log( `Issuance requested, session id: ${id}` );
-
   // get the Access Token
   var accessToken = "";
   try {
@@ -136,16 +105,6 @@ mainApp.app.get('/api/issuer/issuance-request', async (req, res) => {
       return; 
   }
   console.log( `accessToken: ${accessToken}` );
-
-  // prep an initial session state
-  var session = await mainApp.getSessionDataWrapper( id );
-  if ( session ) {
-    session.sessionData = {
-      "status" : "request_created",
-      "message": "Waiting for QR code to be scanned"
-    };
-    mainApp.sessionStore.set( id, session);  
-  }
   
   issuanceConfig.authority = mainApp.config["DidAuthority"]
   issuanceConfig.callback.url = `https://${req.hostname}/api/request-callback`;
@@ -183,8 +142,8 @@ mainApp.app.get('/api/issuer/issuance-request', async (req, res) => {
       const insert = `INSERT INTO seq (num) VALUES (${next})`;
       db.run(insert);
       issuanceConfig.claims.number = next.toString();
+      issuanceConfig.claims.name = req.params.nimi;
     }
-    // issuanceConfig.claims.email = "info@findy.fi";
   }
   console.log( issuanceConfig );
 
