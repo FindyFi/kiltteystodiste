@@ -63,6 +63,9 @@ h1 {
   opacity: 0;
   transform: rotate3d(0, 1, 0, 180deg);
 }
+#avain {
+  font-size: larger;
+}
 #laatikko.avattu .logo {
   opacity: 0;
   transform: rotate3d(0, 1, 0, 180deg);
