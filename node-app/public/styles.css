@@ -49,28 +49,28 @@ h1 {
   width: 256px;
   z-index: 2;
 }
-#laatikko img, #qrcode {
+#laatikko .logo, #qrcode {
   position: absolute;
   left: 0;
   top: 0;
   transition: 0.5s all;
 }
-#laatikko img {
-  transform: rotate3d(0, 0, 0, 0);
+#laatikko .logo {
+  transform: rotate3d(0, 1, 0, 0);
 }
 #qrcode {
   background-color: #41ebff;
   opacity: 0;
   transform: rotate3d(0, 1, 0, 180deg);
 }
-#laatikko.avattu img {
+#laatikko.avattu .logo {
   opacity: 0;
   transform: rotate3d(0, 1, 0, 180deg);
   z-index: 1;
 }
 #laatikko.avattu #qrcode {
   opacity: 1;
-  transform: rotate3d(0, 0, 0, 0);
+  transform: rotate3d(0, 1, 0, 0);
   z-index: 2;
 }
 #ohje {
