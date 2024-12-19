@@ -71,6 +71,14 @@
                     if (respJson.pin) {
                         document.getElementById('ohje').textContent += " Kun Authenticator pyytää nelinumeroista koodia, syötä QR-koodin alla olevat numerot."
                     }
+                    const qrDiv = document.getElementById('qrcode')
+                    const img = qrDiv.querySelector('img')
+                    if (img) {
+                        const a = document.createElement('a')
+                        a.href = respJson.url
+                        qrDiv.appendChild(a)
+                        a.appendChild(img)
+                    }
                 }
             })
             let stars = 0
