@@ -24,7 +24,6 @@
             <img class="logo" src="favicon.png" alt="Findynet" height="256"/>
             <div id="qrcode"></div>    
         </div>
-        <div id="avain"></div>
         <h1>Olen ollut kiltti -todiste</h1>
         <div id="ohje">
             <p>Joulu on aivan nurkan takana, ja pian kuuluu tuttu kysymys: <q>Onko täällä ollut kilttejä lapsia?</q></p>
@@ -33,6 +32,7 @@
             <p>Kun pukki kysyy, voit ylpeänä esittää todistuksesi ja vastata: <q>Kyllä, olen ollut kiltti – ja tässä on todisteeni!</q></p>
             <p>Kirjoita nimesi alla olevaan kenttään ja paina <q>Lataa todiste</q>. Saat henkilökohtaisen todisteen, jossa kerrotaan, että olet ollut kiltti vuonna 2024.</p>
         </div>
+        <div id="avain"></div>
         <form id="form">
             <input type="text" name="nimi" id="nimi" placeholder="Oikea tai lempinimesi"/>
             <button type="button" id="lataa">Lataa todiste</button>
@@ -66,10 +66,10 @@
                 else {
                     qrcode.makeCode(respJson.url)
                     document.getElementById('laatikko').classList.toggle('avattu')
-                    document.getElementById('avain').textContent = respJson.pin
                     document.getElementById('ohje').textContent = "Skannaa QR-koodi Microsoft Authenticator -sovelluksella."
                     if (respJson.pin) {
-                        document.getElementById('ohje').textContent += " Kun Authenticator pyytää nelinumeroista koodia, syötä QR-koodin alla olevat numerot."
+                        document.getElementById('ohje').textContent += " Kun Authenticator pyytää nelinumeroista koodia, syötä alla olevat numerot."
+                        document.getElementById('avain').textContent = respJson.pin
                     }
                     const qrDiv = document.getElementById('qrcode')
                     const img = qrDiv.querySelector('img')
@@ -79,6 +79,8 @@
                         qrDiv.appendChild(a)
                         a.appendChild(img)
                     }
+                    const f = document.getElementById('form')
+                    f.style.display = 'none'
                 }
             })
             let stars = 0
