@@ -59,7 +59,9 @@ h1 {
   transform: rotate3d(0, 1, 0, 0);
 }
 #qrcode {
-  background-color: #41ebff;
+  background-color: #FFF;
+  border-radius: 0.25em;
+  padding: 0.5em;
   opacity: 0;
   transform: rotate3d(0, 1, 0, 180deg);
 }
