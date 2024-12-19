@@ -77,6 +77,7 @@ h1 {
 #avain {
   font-size: larger;
   font-weight: bold;
+  letter-spacing: 0.25em;
 }
 #laatikko.avattu .logo {
   opacity: 0;
